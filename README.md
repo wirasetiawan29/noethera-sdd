@@ -1,19 +1,18 @@
-# SDD — Spec Driven Development (AI-first template)
+# Noethera SDD — Spec Driven Development (AI-first)
 
 **Human:** give instructions in chat (add feature, update feature, fix bug, doc update, user flow).  
-**AI:** read this README as the **core reference**, then follow the rules it points to. Run Spec → Design → Implement → Verify every time.
+**AI:** read this README as the **core reference**, then follow the rules and workflows it points to. Run Spec → Design → Implement → Verify every time.
 
-This README does not replace the rules — it is the **main index**: it tells you what exists and where each rule lives. Use it first; then load the rule files by path below.
+This README does not replace the rules — it is the **main index**: it tells you what exists and where each piece lives.
 
 ---
 
 ## For AI: how to use this repo
 
-1. **Read this README first.** It is the core reference. From it you get: what SDD is, the file structure, and which rule file to use for what.
-2. **Then read the rule files** listed in the [Rules reference](#rules-reference) section. Paths are relative to the repo root (e.g. `.agent/rules/sdd-workflow.md`). If you have this repo on disk, open those paths; if you have only the repo URL, fetch or resolve those paths from the same repo.
-3. **Apply the workflow** from `sdd-workflow.md` and the rest of the rules for every user request.
-
-No need to create extra files in the project — use this repo (README + rule files) as the single source of truth.
+1. **Read this README first.** Core reference: SDD, structure, load order.
+2. **Load `.agent/workflows/`, `.agent/rules/`, `.agent/skills/`** — tools typically load all three. See `.agent/README.md` and `.agent/MANIFEST.yaml` for the full index.
+3. **Apply the workflow** from `.agent/workflows/sdd-workflow.md` and all rules for every user request.
+4. **MANIFEST.yaml** — Central index. Use for tooling: rules, skills, triggers, tasks template.
 
 ---
 
@@ -23,39 +22,33 @@ No need to create extra files in the project — use this repo (README + rule fi
 <repo-root>/
 ├── README.md                    ← core reference (you are here)
 └── .agent/
-    └── rules/
-        ├── sdd-workflow.md      ← workflow + instruction types
-        ├── core-design-principles.md
-        ├── security-mandate.md
-        ├── reliability-and-errors.md
-        ├── architecture-and-patterns.md
-        └── api-and-maintainability.md
+    ├── MANIFEST.yaml            ← central index
+    ├── workflows/
+    │   ├── sdd-workflow.md      ← Spec → Design → Implement → Verify
+    │   └── phases/              ← spec, design, verify checklists
+    ├── rules/                   ← guardrails (24 rules)
+    ├── skills/                  ← on-demand how-to (4 skills)
+    ├── tasks/                   ← optional task tracking (_template.yaml)
+    ├── specs/                   ← spec artifacts for traceability (_template.yaml)
+    └── project/                 ← project-specific overrides (see stack-conventions.example.md)
+        ├── rules/
+        └── skills/
 ```
 
-Only these files. README points to the rules; the rules hold the full instructions.
-
 ---
 
-## Rules reference
+## Rules reference (summary)
 
-Use this as the map. Each row is one rule file: **path** (relative to repo root) and **what it’s for**. Read the file at that path for the full text.
+| Path | Purpose |
+|------|---------|
+| **`.agent/workflows/sdd-workflow.md`** | **Start here.** Instruction types, phase order, entry points (chat, task). |
+| **`.agent/rules/core-design-principles.md** | SOLID, DRY, KISS, YAGNI, separation of concerns. |
+| **`.agent/rules/security-mandate.md** | Never trust input; deny by default; fail secure; defense in depth. |
+| **`.agent/rules/reliability-and-errors.md** | Fail fast; error handling; resources; concurrency; idempotency. |
+| **`.agent/rules/architecture-and-patterns.md** | Layering, pattern choice, anti-patterns. |
+| **`.agent/rules/api-and-maintainability.md** | API design, testing, code organization, observability. |
 
-| Path | Purpose — when to use it |
-|------|---------------------------|
-| **`.agent/rules/sdd-workflow.md`** | **Start here.** Instruction types (add/update feature, fix bug, doc update, user flow), phase order Spec → Design → Implement → Verify, and critical do/don’ts. |
-| **`.agent/rules/core-design-principles.md`** | SOLID, DRY, KISS, YAGNI, Separation of Concerns, Composition over Inheritance, maintainability. |
-| **`.agent/rules/security-mandate.md`** | Never trust input; deny by default; fail secure; defense in depth; no hardcoded secrets; parameterized queries. |
-| **`.agent/rules/reliability-and-errors.md`** | Fail fast; error handling; resources and concurrency; idempotency and retries. |
-| **`.agent/rules/architecture-and-patterns.md`** | Layering, pattern selection (when to use what), anti-patterns to avoid. |
-| **`.agent/rules/api-and-maintainability.md`** | API design, testing, code organization, documentation, observability. |
-
----
-
-## Share and use
-
-- **Put this repo in git.** Share the **repo URL** so others (or the AI) can read it.
-- **In a new project:** give the AI this repo’s URL and say something like: “Use SDD from this repo — read the README first, then the rule files it points to.” The README is the core reference; the rules are at the paths above.
-- **If your tool only loads rules from the project folder:** clone or copy this repo (or the `sdd/` folder) into the project so the AI can read `.agent/rules/` from disk; the README still stays the main reference that points to each rule.
+Full list: see **`.agent/MANIFEST.yaml`** or **`.agent/README.md`**.
 
 ---
 
@@ -67,8 +60,22 @@ Use this as the map. Each row is one rule file: **path** (relative to repo root)
 - **Doc update** — Clarify which docs and what change → update only that scope.
 - **User flow** — Clarify flow (steps, success/error) → treat as spec → design → implement → verify.
 
-Full detail is in **`.agent/rules/sdd-workflow.md`**.
+Full detail in **`.agent/workflows/sdd-workflow.md`**.
 
 ---
 
-*README = core reference. Rules = full instructions. Share the repo URL; AI reads README first, then the rule files it points to.*
+## Validation
+
+Run `make validate` to check that MANIFEST and `.agent/` structure are intact.
+
+---
+
+## Share and use
+
+- **Put this repo in git.** Share the repo URL so others (or the AI) can read it.
+- **In a new project:** give the AI this repo's URL: "Use SDD from this repo — read the README first, then load .agent/workflows, .agent/rules, and .agent/skills."
+- **Agent context:** Load `.agent/workflows/`, `.agent/rules/`, and `.agent/skills/`.
+
+---
+
+*README = core reference. MANIFEST = index. Workflows + rules + skills = full instructions.*

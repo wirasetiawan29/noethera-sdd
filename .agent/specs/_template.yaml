@@ -1,0 +1,18 @@
+# Spec artifact template — save as .agent/specs/<task-id>-<slug>.yaml
+# Use when you want a persisted spec (traceability) before or during implementation.
+
+id: SPEC-XXX
+task_ref: TASK-XXX   # optional: links to tasks/TASK-XXX.yaml
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+
+# Phase 1 output — fill during Spec phase
+goal: ""
+scope:
+  in: []
+  out: []
+acceptance_criteria: []
+
+# For bugs
+reproduction_steps: []
+expected_vs_actual: ""

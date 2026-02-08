@@ -1,0 +1,122 @@
+# Noethera SDD — Agent Manifest
+# Central index for workflows, rules, and skills. Use for tooling and load order.
+
+version: "1"
+
+workflow:
+  default: workflows/sdd-workflow.md
+  phases:
+    spec: workflows/phases/spec.md
+    design: workflows/phases/design.md
+    verify: workflows/phases/verify.md
+
+rules:
+  - id: rugged-software-constitution
+    path: rules/rugged-software-constitution.md
+    trigger: always_on
+  - id: security-mandate
+    path: rules/security-mandate.md
+    trigger: always_on
+  - id: core-design-principles
+    path: rules/core-design-principles.md
+    trigger: always_on
+  - id: architecture-and-patterns
+    path: rules/architecture-and-patterns.md
+    trigger: always_on
+  - id: api-and-maintainability
+    path: rules/api-and-maintainability.md
+    trigger: always_on
+  - id: reliability-and-errors
+    path: rules/reliability-and-errors.md
+    trigger: always_on
+  - id: logging-and-observability-mandate
+    path: rules/logging-and-observability-mandate.md
+    trigger: always_on
+  - id: code-completion-mandate
+    path: rules/code-completion-mandate.md
+    trigger: always_on
+  - id: code-organization-principles
+    path: rules/code-organization-principles.md
+    trigger: always_on
+  - id: documentation-principles
+    path: rules/documentation-principles.md
+    trigger: always_on
+  - id: concurrency-and-threading-mandate
+    path: rules/concurrency-and-threading-mandate.md
+    trigger: always_on
+  - id: avoid-circular-dependencies
+    path: rules/avoid-circular-dependencies.md
+    trigger: always_on
+  - id: code-idioms-and-conventions
+    path: rules/code-idioms-and-conventions.md
+    trigger: always_on
+  - id: security-principles
+    path: rules/security-principles.md
+    trigger: model_decision
+    description: When implementing auth/authz, input validation, crypto, or handling sensitive data
+  - id: testing-strategy
+    path: rules/testing-strategy.md
+    trigger: model_decision
+    description: When writing tests, organizing test files, or setting up testing infrastructure
+  - id: logging-and-observability-principles
+    path: rules/logging-and-observability-principles.md
+    trigger: model_decision
+    description: When implementing log statements, log levels, or designing observability
+  - id: dependency-management-principles
+    path: rules/dependency-management-principles.md
+    trigger: model_decision
+    description: When managing dependencies, package files, or module imports
+  - id: resources-and-memory-management-principles
+    path: rules/resources-and-memory-management-principles.md
+    trigger: model_decision
+    description: When working with resources requiring cleanup or resource pools
+  - id: concurrency-and-threading-principles
+    path: rules/concurrency-and-threading-principles.md
+    trigger: model_decision
+    description: When implementing concurrent code, locks, async flows, or multi-threaded logic
+  - id: project-structure
+    path: rules/project-structure.md
+    trigger: model_decision
+    description: When creating or reorganizing project layout, monorepos, or module boundaries
+  - id: data-serialization-principles
+    path: rules/data-serialization-principles.md
+    trigger: model_decision
+    description: When designing API payloads, persistence format, or cross-boundary data exchange
+  - id: performance-optimization-principles
+    path: rules/performance-optimization-principles.md
+    trigger: model_decision
+    description: When optimizing performance, profiling, or working on performance-critical paths
+  - id: command-execution-principles
+    path: rules/command-execution-principles.md
+    trigger: model_decision
+    description: When executing external commands, shell scripts, or system processes
+  - id: configuration-management-principles
+    path: rules/configuration-management-principles.md
+    trigger: model_decision
+    description: When working with config, env vars, settings files, or secrets management
+
+skills:
+  - id: debugging-protocol
+    path: skills/debugging-protocol
+    triggers_on: ["fix bug", "debug", "root cause", "flaky test", "investigate", "broken", "not working", "error", "troubleshoot"]
+  - id: frontend-design
+    path: skills/frontend-design
+    triggers_on: ["UI", "frontend", "style", "styling", "design", "landing page", "dashboard", "beautify", "component", "page", "interface", "visual"]
+  - id: sequential-thinking
+    path: skills/sequential-thinking
+    triggers_on: ["complex", "planning", "multi-step", "analyse", "analyze", "reason", "break down", "think through", "strategy"]
+  - id: code-review-checklist
+    path: skills/code-review-checklist
+    triggers_on: ["verify", "done", "complete", "review", "checklist", "final check", "before merge", "finished"]
+
+tasks:
+  dir: tasks/
+  template: tasks/_template.yaml
+
+specs:
+  dir: specs/
+  template: specs/_template.yaml
+
+project:
+  rules: project/rules/
+  skills: project/skills/

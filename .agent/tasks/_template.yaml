@@ -1,0 +1,26 @@
+# Task template — copy as TASK-001.yaml, TASK-002.yaml, etc.
+# Use when: add feature (3+ criteria), complex bug, or update with impact.
+
+id: TASK-XXX
+type: add_feature   # add_feature | update_feature | fix_bug | doc_update | user_flow
+status: draft       # draft | spec_done | design_done | implementing | verifying | done
+created: YYYY-MM-DD
+request: "Brief description of what the user asked for"
+
+# Phase 1 — Spec (fill before Design)
+spec:
+  goal: ""
+  scope:
+    in: []
+    out: []
+  acceptance_criteria: []
+
+# Phase 2 — Design (brief notes before Implement)
+design:
+  layers: []
+  interfaces: []
+  patterns: []
+
+# Phase 3–4 — Implement & Verify
+# Update status as you go. For bugs: add reproduction steps, root cause.
+# Example for fix_bug: spec.reproduction: "1. Login 2. Click X 3. See error"
